@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Betogether — Le tue abilità, ovunque tu sia</title>
+  <meta name="description"
+    content="Betogether: un’unica app e un unico profilo. Grazie alla geolocalizzazione dinamica i tuoi servizi ti seguono ovunque: Roma, Londra, Sydney, Los Angeles." />
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #0f1730;
+      --muted: #a9b4d0;
+      --text: #eef2ff;
+      --brand: #7c5cff;
+      --brand2: #22c55e;
+      --border: rgba(255, 255, 255, .10);
+      --shadow: 0 20px 60px rgba(0, 0, 0, .35);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(124, 92, 255, .35), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(34, 197, 94, .25), transparent 55%),
+        radial-gradient(800px 600px at 50% 95%, rgba(124, 92, 255, .18), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 16, 32, .55);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: nowrap;
+      /* 👈 single line */
+    }
+
+    /* Right side buttons */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      /* 👈 text ek line me */
+      padding: 18px 0;
+    }
+
+    /* Play Store image */
+    .store-btn img {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    /* Language dropdown */
+    #lang-select {
+      white-space: nowrap;
+    }
+
+    /* Prevent text breaking */
+    .nav-links a,
+    .btn {
+      white-space: nowrap;
+    }
+
+    /* 🔽 Responsive for mobile */
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+        /* already hidden in your design */
+      }
+
+      .store-btn img {
+        height: 40px;
+        /* mobile size */
+      }
+    }
+
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand), #4fd1c5);
+      box-shadow: 0 10px 30px rgba(124, 92, 255, .35);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .06);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, .10);
+      border-color: rgba(255, 255, 255, .16);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--brand), #4fd1c5);
+      border-color: transparent;
+      box-shadow: 0 18px 50px rgba(124, 92, 255, .35);
+      color: #06101a;
+    }
+
+    .btn.primary:hover {
+      filter: brightness(1.03);
+    }
+
+    .hero {
+      padding: 56px 0 20px;
+    }
+
+    .grid-hero {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .grid-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .05);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--muted);
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .pill .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--brand2);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, .12);
+    }
+
+    h1 {
+      margin: 14px 0 12px;
+      font-size: clamp(34px, 4.2vw, 56px);
+      line-height: 1.06;
+      letter-spacing: -0.8px;
+    }
+
+    .sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 60ch;
+      margin: 0 0 18px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: rgba(15, 23, 48, .78);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .hero-card {
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -60px -60px auto auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, .35), transparent 55%);
+      transform: rotate(15deg);
+      pointer-events: none;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .stat .k {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .stat .v {
+      font-size: 18px;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin: 0 0 10px;
+      letter-spacing: -0.4px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 75ch;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .feature h3 {
+      margin: 8px 0 8px;
+      font-size: 16px;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(124, 92, 255, .16);
+      border: 1px solid rgba(124, 92, 255, .25);
+      font-size: 18px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 980px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04);
+      border-radius: 16px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .step .n {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      background: rgba(34, 197, 94, .16);
+      border: 1px solid rgba(34, 197, 94, .25);
+      color: var(--text);
+    }
+
+    .step h3 {
+      margin: 10px 0 8px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .examples {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .example {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .example h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .example ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .example li {
+      margin: 6px 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .05);
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .earn-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 980px) {
+      .earn-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .list li {
+      margin: 8px 0;
+    }
+
+    .quotes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .quotes {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    blockquote {
+      margin: 0;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04);
+      padding: 16px;
+    }
+
+    blockquote p {
+      margin: 0 0 10px;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    blockquote footer {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      padding: 28px 0 44px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    /* anchor spacing */
+    .anchor {
+      scroll-margin-top: 84px;
+    }
+
+    /* simple mobile menu hint */
+    .note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="logo" href="#top">
+          <img src="logo.png" alt="Betogether" class="logo-badge" />
+          <span>Betogether</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navigation">
+          <a href="#how-it-works">How it works</a>
+          <a href="#geolocation">Geolocation</a>
+          <a href="#examples">Examples</a>
+          <a href="#earnings">Earnings</a>
+          <a href="#categories">Categories</a>
+          <a href="betogether-privacy-en.html">Privacy policy</a>
+        </nav>
+
+        <select id="lang-select" aria-label="Language">
+          <option value="betogether-landing-en.html">English</option>
+          <option value="betogether-landing-it%20(1).html">Italiano</option>
+        </select>
+
+        <div class="nav-actions">
+          <a class="btn" href="#contact">Request info</a>
+          <a href="#get-started" class="store-btn">
+            <img src="playstore.png" alt="Get it on Play Store" />
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="grid-hero">
+        <div>
+          <div class="pill"><span class="dot"></span> Un unico profilo • Opportunità globali</div>
+          <h1>Le tue abilità, <br />ovunque tu sia.</h1>
+          <p class="sub">
+            Betogether è la piattaforma che unisce <strong>geolocalizzazione dinamica</strong> e servizi reali:
+            ti rende visibile nella città in cui ti trovi — <strong>Roma oggi, Londra domani, Sydney dopodomani</strong>
+            —
+            senza creare nuovi profili e senza perdere reputazione.
+          </p>
+
+          <div class="cta-row" id="scarica">
+            <a class="btn primary" href="#contatti" aria-label="Scarica Betogether">
+              🚀 Scarica / Inizia ora
+            </a>
+            <a class="btn" href="#geolocalizzazione" aria-label="Scopri come funziona la geolocalizzazione">
+              📍 Come ti segue l’app
+            </a>
+          </div>
+
+          <p class="small">
+            ✅ Un solo profilo • ✅ Recensioni valide ovunque • ✅ Pagamenti in-app • ✅ Commissione solo sul guadagno
+          </p>
+        </div>
+
+        <aside class="card hero-card">
+          <h2 style="margin:0 0 10px; font-size:18px;">In breve</h2>
+          <p class="muted" style="margin:0 0 12px;">
+            Betogether ti connette con chi ha bisogno di te <strong>nella zona in cui ti trovi</strong>.
+            Tu ti muovi, il lavoro arriva.
+          </p>
+
+          <div class="stat-grid" role="list">
+            <div class="stat" role="listitem">
+              <div class="k">Profilo</div>
+              <div class="v">Unico</div>
+            </div>
+            <div class="stat" role="listitem">
+              <div class="k">Visibilità</div>
+              <div class="v">Dove sei</div>
+            </div>
+            <div class="stat" role="listitem">
+              <div class="k">Reputazione</div>
+              <div class="v">Sempre con te</div>
+            </div>
+            <div class="stat" role="listitem">
+              <div class="k">Guadagni</div>
+              <div class="v">Tu decidi</div>
+            </div>
+          </div>
+
+          <p class="note">
+            Esempio: sei chef itinerante → stesso profilo, nuove richieste a Londra, Los Angeles, Sydney…
+          </p>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- WHAT IS -->
+  <section class="anchor" id="cosa-e">
+    <div class="container">
+      <h2 class="section-title">Cos’è Betogether</h2>
+      <p class="section-sub">
+        Una community e un marketplace di servizi dove <strong>chi offre viene pagato</strong> e chi cerca aiuto trova
+        persone
+        affidabili in modo semplice, veloce e trasparente.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <div class="icon">🤝</div>
+          <h3>Connessioni reali</h3>
+          <p>Servizi e aiuto concreto tra persone: locale, umano, immediato.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📍</div>
+          <h3>Geolocalizzazione che ti segue</h3>
+          <p>Se cambi città, i tuoi servizi si spostano con te: stesso profilo, nuova visibilità.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">💳</div>
+          <h3>Pagamenti sicuri</h3>
+          <p>Pagamenti in-app, trasparenti. Commissione solo quando guadagni.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="anchor" id="come-funziona">
+    <div class="container">
+      <h2 class="section-title">Come funziona (in 3 passi)</h2>
+      <p class="section-sub">
+        Un’esperienza semplice: crei un profilo, pubblichi i servizi, ricevi richieste. E grazie alla geolocalizzazione,
+        sei visibile <strong>esattamente dove ti trovi</strong>.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h3>Crea un solo profilo</h3>
+          <p>
+            Descrivi chi sei, cosa sai fare e cosa offri. Il tuo profilo è <strong>globale</strong> e rimane lo stesso.
+          </p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h3>Ti muovi. L’app ti segue.</h3>
+          <p>
+            Oggi Roma, domani Londra: Betogether ti rende visibile nella città in cui sei, senza creare nuovi account.
+          </p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h3>Ricevi richieste e guadagna</h3>
+          <p>
+            Le persone che hanno bisogno di te:
+            ti trovano nella loro zona, vedono le tue recensioni (valide ovunque) e ti contattano direttamente.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GEOLOCATION VALUE -->
+  <section class="anchor" id="geolocalizzazione">
+    <div class="container">
+      <div class="two-col">
+        <div class="card">
+          <h2 class="section-title" style="margin-top:0;">Geolocalizzazione dinamica</h2>
+          <p class="section-sub" style="margin-bottom:10px;">
+            Betogether è fatta per chi si muove: la tua visibilità è legata a <strong>dove sei</strong>, non a dove hai
+            creato l’account.
+          </p>
+
+          <ul class="list">
+            <li><strong>Se sei a Roma</strong> → compari a Roma con le tue abilità</li>
+            <li><strong>Se sei a Londra</strong> → compari a Londra con le stesse abilità</li>
+            <li><strong>Se sei a Sydney o Los Angeles</strong> → stesso profilo, nuove opportunità</li>
+          </ul>
+
+          <p class="muted" style="margin:12px 0 0;">
+            Nessun nuovo profilo. Nessuna perdita di reputazione. <strong>La tua storia ti segue.</strong>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px;">Perché è un vantaggio enorme?</h3>
+          <ul class="list">
+            <li><strong>Continuità</strong>: recensioni e reputazione valgono ovunque</li>
+            <li><strong>Velocità</strong>: atterri in una città e sei subito attivo</li>
+            <li><strong>Libertà</strong>: ideale per travel workers, nomadi digitali, studenti, professionisti</li>
+          </ul>
+
+          <div
+            style="margin-top:14px; padding:14px; border:1px solid var(--border); border-radius:16px; background: rgba(124,92,255,.10);">
+            <div style="font-weight:900;">Esempio rapido</div>
+            <div class="muted" style="margin-top:6px;">
+              Sei un cuoco itinerante: oggi proponi cene private a Roma. Domani a Londra appari automaticamente tra gli
+              chef disponibili,
+              con <strong>lo stesso profilo e le stesse recensioni</strong>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLES -->
+  <section class="anchor" id="esempi">
+    <div class="container">
+      <h2 class="section-title">Esempi reali (in più punti)</h2>
+      <p class="section-sub">
+        La stessa identità, la stessa reputazione, nuove richieste in ogni città. Ecco come cambia la vita con
+        Betogether.
+      </p>
+
+      <div class="examples">
+        <div class="example">
+          <div class="tag">👨‍🍳 Chef / Food experience</div>
+          <h3>Sei un cuoco in giro per il mondo</h3>
+          <ul>
+            <li><strong>Roma:</strong> cene private, cooking class</li>
+            <li><strong>Londra:</strong> famiglie, eventi, ristoranti che cercano chef</li>
+            <li><strong>Los Angeles / Sydney:</strong> catering, experience, meal prep</li>
+          </ul>
+          <p class="muted" style="margin:10px 0 0;"><strong>Stesso profilo</strong> → nuove opportunità automatiche.</p>
+        </div>
+
+        <div class="example">
+          <div class="tag">💻 Freelance / Digital</div>
+          <h3>Sei un freelance o un professionista</h3>
+          <ul>
+            <li><strong>Milano:</strong> consulenze, supporto locale</li>
+            <li><strong>Barcellona:</strong> coworking, startup, privati</li>
+            <li><strong>Berlino:</strong> nuove richieste, stessi feedback</li>
+          </ul>
+          <p class="muted" style="margin:10px 0 0;">Viaggi, ma <strong>non riparti da zero</strong>.</p>
+        </div>
+
+        <div class="example">
+          <div class="tag">🐾 Pet sitting / Assistenza</div>
+          <h3>Pet sitter, dog walker, assistenza</h3>
+          <ul>
+            <li>Cambi città per studio o lavoro? Sei visibile automaticamente nella nuova zona</li>
+            <li>Recensioni e fiducia restano con te</li>
+            <li>Più reputazione → più richieste</li>
+          </ul>
+          <p class="muted" style="margin:10px 0 0;">La community ti trova <strong>dove sei</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EARNINGS -->
+  <section class="anchor" id="guadagni">
+    <div class="container">
+      <h2 class="section-title">Guadagni: come funziona</h2>
+      <p class="section-sub">
+        Con Betogether guadagni in modo flessibile e trasparente. Tu definisci il valore del tuo tempo.
+      </p>
+
+      <div class="earn-grid">
+        <div class="card">
+          <h3 style="margin:0 0 10px;">Come guadagni</h3>
+          <ul class="list">
+            <li><strong>Decidi tu il prezzo</strong>: tariffa oraria o per servizio</li>
+            <li><strong>Commissione solo quando lavori</strong>: paghi solo se guadagni</li>
+            <li><strong>Pagamenti protetti</strong>: gestione in-app, chiara e sicura</li>
+            <li><strong>Più reputazione = più richieste</strong>: recensioni e affidabilità aumentano la domanda</li>
+          </ul>
+          <div
+            style="margin-top:14px; padding:14px; border:1px solid var(--border); border-radius:16px; background: rgba(34,197,94,.10);">
+            <div style="font-weight:900;">Bonus della geolocalizzazione</div>
+            <div class="muted" style="margin-top:6px;">
+              Ti sposti? Non perdi clienti potenziali: semplicemente <strong>cambi bacino di domanda</strong>.
+              Roma, Londra, Sydney… e continui a guadagnare.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 10px;">Per chi cerca aiuto</h3>
+          <ul class="list">
+            <li>Trova persone affidabili vicino a sé</li>
+            <li>Recensioni reali per scegliere meglio</li>
+            <li>Prezzi chiari e servizio rapido</li>
+          </ul>
+
+          <h3 style="margin:18px 0 10px;">Per chi offre</h3>
+          <ul class="list">
+            <li>Flessibilità totale (quando e quanto lavorare)</li>
+            <li>Visibilità automatica nella città in cui sei</li>
+            <li>Un profilo unico: reputazione sempre con te</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="anchor" id="categorie">
+    <div class="container">
+      <h2 class="section-title">Categorie più attive</h2>
+      <p class="section-sub">
+        Le categorie si adattano alla città, ma tu resti lo stesso: le tue abilità sono sempre pronte a diventare
+        opportunità.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <div class="icon">👨‍🍳</div>
+          <h3>Cucina & Food experience</h3>
+          <p>Chef a domicilio, cooking class, catering, meal prep.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📚</div>
+          <h3>Lezioni & Formazione</h3>
+          <p>Ripetizioni, coaching, lingue, skill professionali.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">💻</div>
+          <h3>Tech & Digitale</h3>
+          <p>Supporto IT, setup, social, design, micro-consulenze.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🐾</div>
+          <h3>Pet Sitting</h3>
+          <p>Dog walking, pet care, assistenza durante viaggi.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🧹</div>
+          <h3>Aiuto domestico</h3>
+          <p>Pulizie, commissioni, supporto quotidiano.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🌿</div>
+          <h3>Manutenzione</h3>
+          <p>Giardinaggio, piccoli lavori, aiuto pratico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="anchor" id="testimonianze">
+    <div class="container">
+      <h2 class="section-title">Testimonianze</h2>
+      <p class="section-sub">
+
+      </p>
+
+      <div class="quotes">
+        <blockquote>
+          <p>⭐⭐⭐⭐⭐ “Ho iniziato con ripetizioni e ora mi arrivano richieste appena cambio città.”</p>
+          <footer>— Martina, Firenze → Londra</footer>
+        </blockquote>
+        <blockquote>
+          <p>⭐⭐⭐⭐⭐ “Sono uno chef itinerante: un profilo solo e clienti ovunque. È esattamente ciò che mancava.”</p>
+          <footer>— Luca, Chef (Roma → Los Angeles)</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="anchor" id="contatti">
+    <div class="container">
+      <div class="card" style="padding:22px;">
+        <h2 class="section-title" style="margin-top:0;">Unisciti a Betogether</h2>
+        <p class="section-sub" style="margin-bottom:12px;">
+          Crea il tuo profilo, pubblica i tuoi servizi e lascia che l’app ti porti opportunità <strong>ovunque tu
+            sia</strong>.
+          Roma, Londra, Sydney, Los Angeles… <strong>Betogether ti segue.</strong>
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#scarica">🚀 Inizia ora</a>
+          <a class="btn" href="mailto:info@betogetherapp.com">✉️ Contattaci</a>
+        </div>
+
+        <p class="small">
+          Suggerimento: sostituisci “info@betogetherapp.com” con la tua email reale e aggiungi link Store quando
+          disponibili.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img src="logo.png" aria-hidden="true" style="width:34px;height:34px;border-radius:12px;object-fit:cover;" />
+          <strong style="color:var(--text)">Betogether</strong>
+          <span class="muted">© <span id="year"></span></span>
+        </div>
+        <div class="muted">
+          Un unico profilo • Geolocalizzazione dinamica • Opportunità globali
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Smooth scrolling for anchor links (optional)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", id);
+      });
+    });
+
+    // Language selector: set selection and redirect on change
+    (function () {
+      const sel = document.getElementById('lang-select');
+      if (!sel) return;
+      const href = window.location.href;
+      for (const opt of sel.options) { if (href.includes(opt.value)) opt.selected = true; }
+      sel.addEventListener('change', () => { if (sel.value) window.location.href = sel.value; });
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Betogether — Informativa sulla privacy</title>
+    <meta name="description" content="Informativa sulla privacy di Betogether" />
+
+    <style>
+        :root {
+            --bg: #0b1020;
+            --card: #0f1730;
+            --muted: #a9b4d0;
+            --text: #eef2ff;
+            --brand: #7c5cff;
+            --brand2: #22c55e;
+            --border: rgba(255, 255, 255, .10);
+            --shadow: 0 20px 60px rgba(0, 0, 0, .35);
+            --radius: 18px;
+            --max: 1120px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            background: radial-gradient(1200px 700px at 20% 10%, rgba(124, 92, 255, .35), transparent 60%), radial-gradient(900px 600px at 90% 20%, rgba(34, 197, 94, .25), transparent 55%), radial-gradient(800px 600px at 50% 95%, rgba(124, 92, 255, .18), transparent 55%), var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit
+        }
+
+        .container {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background: rgba(11, 16, 32, .55);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: nowrap;
+            /* 👈 single line */
+        }
+
+        /* Right side buttons */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            /* 👈 text ek line me */
+            padding: 18px 0;
+        }
+
+        /* Play Store image */
+        .store-btn img {
+            height: 44px;
+            width: auto;
+            display: block;
+        }
+
+        /* Language dropdown */
+        #lang-select {
+            white-space: nowrap;
+        }
+
+        /* Prevent text breaking */
+        .nav-links a,
+        .btn {
+            white-space: nowrap;
+        }
+
+        /* 🔽 Responsive for mobile */
+        @media (max-width: 980px) {
+            .nav-links {
+                display: none;
+                /* already hidden in your design */
+            }
+
+            .store-btn img {
+                height: 40px;
+                /* mobile size */
+            }
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--brand), #4fd1c5);
+            box-shadow: 0 10px 30px rgba(124, 92, 255, .35);
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .btn {
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, .06);
+            color: var(--text);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--brand), #4fd1c5);
+            color: #06101a;
+            border-color: transparent;
+        }
+
+        h1 {
+            margin: 14px 0 12px;
+            font-size: clamp(34px, 4.2vw, 56px);
+            line-height: 1.06;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin: 0 0 10px;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            margin: 0 0 18px;
+            max-width: 75ch;
+        }
+
+        .card {
+            background: rgba(15, 23, 48, .78);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+
+        .list {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+
+        .footer {
+            padding: 28px 0 44px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a class="logo" href="#top">
+                    <img src="logo.png" alt="Betogether" class="logo-badge" />
+                    <span>Betogether</span>
+                </a>
+
+                <nav class="nav-links" aria-label="Navigation">
+                    <a href="betogether-landing-en.html#how-it-works">How it works</a>
+                    <a href="betogether-landing-en.html#geolocation">Geolocation</a>
+                    <a href="betogether-landing-en.html#examples">Examples</a>
+                    <a href="betogether-landing-en.html#earnings">Earnings</a>
+                    <a href="betogether-landing-en.html#categories">Categories</a>
+                    <a href="betogether-privacy-en.html">Privacy policy</a>
+
+                </nav>
+
+                <select id="lang-select" aria-label="Language">
+                    <option value="en">English</option>
+                    <option value="it">Italiano</option>
+                </select>
+ssh -T git@github.com
+
+
+                <div class="nav-actions">
+                    <a class="btn" href="#contact">Request info</a>
+                    <a href="#get-started" class="store-btn">
+                        <img src="playstore.png" alt="Get it on Play Store" />
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main style="padding:48px 0;">
+        <div class="container">
+            <div class="card" style="padding:28px;">
+                <h2 class="section-title">Informativa sulla privacy (Italiano)</h2>
+                <p class="section-sub">Data di efficacia: 01 Gennaio 2026</p>
+
+                <p>Betogether rispetta la tua privacy. Questa applicazione è progettata per funzionare senza
+                    raccogliere, memorizzare o elaborare dati personali degli utenti.</p>
+
+                <h3 style="margin-top:8px;">Nessuna raccolta di dati</h3>
+                <p>Betogether non raccoglie informazioni personali o sensibili.</p>
+
+                <p>Questo include, a titolo esemplificativo ma non esaustivo:</p>
+                <ul class="list">
+                    <li>Nomi, indirizzi email o numeri di telefono</li>
+                    <li>Dati di localizzazione o GPS</li>
+                    <li>Messaggi, chat o comunicazioni</li>
+                    <li>Identificatori del dispositivo o dati di analisi</li>
+                    <li>Contatti, foto o file</li>
+                </ul>
+
+                <h3 style="margin-top:8px;">Conservazione dei dati</h3>
+                <p>Betogether non mantiene database utente né sistemi di archiviazione esterni. Qualsiasi interazione
+                    all'interno dell'app non viene memorizzata o tracciata da noi.</p>
+
+                <h3 style="margin-top:8px;">Condivisione dei dati</h3>
+                <p>Poiché non vengono raccolti dati degli utenti, non vengono condivisi dati con terze parti,
+                    inserzionisti, provider di analytics o servizi esterni.</p>
+
+                <h3 style="margin-top:8px;">Privacy dei minori</h3>
+                <p>Betogether non raccoglie consapevolmente dati da minori sotto i 13 anni. Poiché non vengono raccolti
+                    dati, l'app è sicura in termini di privacy per utenti di tutte le età.</p>
+
+                <h3 style="margin-top:8px;">Servizi di terze parti</h3>
+                <p>Betogether non integra SDK o servizi di terze parti che raccolgono dati utente.</p>
+
+                <h3 style="margin-top:8px;">Aggiornamenti della policy</h3>
+                <p>Se in futuro le pratiche sui dati dovessero cambiare, questa Informativa sulla privacy verrà
+                    aggiornata di conseguenza.</p>
+
+                <h3 style="margin-top:8px;">Contatti</h3>
+                <p>Per domande sull'Informativa, puoi contattarci a: <a
+                        href="mailto:info@betogetherapp.com">info@betogetherapp.com</a></p>
+
+                <p style="margin-top:12px; font-weight:700;">Betogether — Better together.</p>
+
+                <p style="margin-top:18px; font-size:14px; color:var(--muted);">Torna alla <a
+                        href="betogether-landing-it%20(1).html">Home</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div style="display:flex; gap:14px; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <img src="logo.png" aria-hidden="true"
+                        style="width:34px;height:34px;border-radius:12px;object-fit:cover;" />
+                    <strong style="color:var(--text)">Betogether</strong>
+                    <span class="muted">© <span id="year"></span></span>
+                </div>
+                <div class="muted">Un unico profilo • Geolocalizzazione dinamica • Opportunità globali</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <script>
+        document.querySelectorAll('.nav-inner a[href^="#"]').forEach(link => {
+            link.addEventListener("click", function (e) {
+                const target = this.getAttribute("href");
+
+                if (!location.pathname.includes("betogether-landing")) {
+                    e.preventDefault();
+                    window.location.href = "betogether-landing-en.html" + target;
+                }
+            });
+        });
+    </script>
+
+    <script>
+        (function () {
+            const sel = document.getElementById('lang-select');
+            if (!sel) return;
+
+            const path = location.pathname;
+
+            // 🔁 Sync dropdown with current page
+            if (path.includes('-it')) {
+                sel.value = 'it';
+            } else {
+                sel.value = 'en';
+            }
+
+            sel.addEventListener('change', function () {
+                const lang = this.value;
+                const isPrivacy = location.pathname.includes('privacy');
+
+                if (isPrivacy) {
+                    location.href = lang === 'it'
+                        ? 'betogether-privacy-it.html'
+                        : 'betogether-privacy-en.html';
+                } else {
+                    location.href = lang === 'it'
+                        ? 'betogether-landing-it%20(1).html'
+                        : 'betogether-landing-en.html';
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
