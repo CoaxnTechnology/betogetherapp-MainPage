@@ -532,6 +532,166 @@
       color: var(--muted);
       margin-top: 10px;
     }
+
+    /* Responsive layout overrides */
+    @media (min-width: 1500px) {
+      .container {
+        max-width: 1440px;
+        padding: 0 32px;
+      }
+
+      .grid-hero {
+        grid-template-columns: 1.25fr .75fr;
+        gap: 36px;
+      }
+
+      .features,
+      .steps,
+      .examples,
+      .earn-grid,
+      .quotes {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      .nav-inner {
+        gap: 16px;
+      }
+
+      .store-btn img {
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .nav-inner {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .nav-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .nav-actions .btn,
+      .nav-actions .store-btn,
+      #lang-select {
+        flex: 1 1 auto;
+        min-width: 120px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex: 1 1 100%;
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        margin-top: 10px;
+      }
+
+      .nav-links a {
+        flex: 0 0 auto;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .store-btn img {
+        height: 34px;
+      }
+
+      .hero {
+        padding: 40px 0 20px;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+
+      .grid-hero,
+      .two-col,
+      .features,
+      .steps,
+      .examples,
+      .earn-grid,
+      .quotes {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cta-row .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        gap: 12px;
+        padding: 14px 0;
+      }
+
+      .nav-actions {
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .store-btn img {
+        height: 30px;
+      }
+
+      #lang-select {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .btn,
+      .store-btn {
+        justify-content: center;
+      }
+
+      .hero {
+        padding: 28px 0 16px;
+      }
+
+      h1 {
+        font-size: clamp(28px, 9vw, 42px);
+      }
+
+      .sub {
+        font-size: 16px;
+        max-width: 100%;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .card,
+      .feature,
+      .step,
+      .example {
+        padding: 16px;
+      }
+
+      .pill {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 
@@ -541,11 +701,14 @@
   <header class="nav">
     <div class="container">
       <div class="nav-inner">
+
+        <!-- LOGO -->
         <a class="logo" href="#top">
           <img src="logo.png" alt="Betogether" class="logo-badge" />
           <span>Betogether</span>
         </a>
 
+        <!-- NAV LINKS -->
         <nav class="nav-links" aria-label="Navigation">
           <a href="#how-it-works">How it works</a>
           <a href="#geolocation">Geolocation</a>
@@ -555,21 +718,32 @@
           <a href="betogether-privacy-en.html">Privacy policy</a>
         </nav>
 
+        <!-- LANGUAGE -->
         <select id="lang-select" aria-label="Language">
           <option value="index.html">English</option>
           <option value="betogether-landing-it.html">Italiano</option>
         </select>
 
+        <!-- ACTIONS (FIXED ✅ single container) -->
         <div class="nav-actions">
+
           <a class="btn" href="#contact">Request info</a>
+
+          <!-- PLAY STORE -->
           <a href="https://play.google.com/store/apps/details?id=com.app.betogether" class="store-btn" target="_blank"
             rel="noopener noreferrer">
-            <img src="playstore.png" alt="Get it on Play Store" />
+            <img src="playstore.png" alt="Get it on Google Play" />
+          </a>
+
+          <!-- APP STORE -->
+          <a href="https://apps.apple.com/us/app/betogether-app/id6760331110" class="store-btn" target="_blank"
+            rel="noopener noreferrer">
+            <img src="applestore.png" alt="Download on the App Store" />
           </a>
 
         </div>
-      </div>
 
+      </div>
     </div>
   </header>
 

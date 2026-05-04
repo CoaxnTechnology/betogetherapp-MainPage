@@ -20,7 +20,7 @@
             --border: rgba(255, 255, 255, .10);
             --shadow: 0 20px 60px rgba(0, 0, 0, .35);
             --radius: 18px;
-            --max: 1120px;
+            --max: 1440px;
         }
 
         * {
@@ -58,8 +58,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 14px;
+            gap: 8px;
             flex-wrap: nowrap;
+            min-width: 0;
+            overflow-x: visible;
             /* 👈 single line */
         }
 
@@ -67,15 +69,16 @@
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             white-space: nowrap;
+            flex-shrink: 0;
             /* 👈 text ek line me */
-            padding: 18px 0;
+            padding: 12px 0;
         }
 
         /* Play Store image */
         .store-btn img {
-            height: 44px;
+            height: 36px;
             width: auto;
             display: block;
         }
@@ -83,6 +86,8 @@
         /* Language dropdown */
         #lang-select {
             white-space: nowrap;
+            width: 100px;
+            min-width: 100px;
         }
 
         /* Prevent text breaking */
@@ -93,11 +98,6 @@
 
         /* 🔽 Responsive for mobile */
         @media (max-width: 980px) {
-            .nav-links {
-                display: none;
-                /* already hidden in your design */
-            }
-
             .store-btn img {
                 height: 40px;
                 /* mobile size */
@@ -126,7 +126,9 @@
 
         .nav-links {
             display: flex;
-            gap: 18px;
+            flex: 1 1 auto;
+            min-width: 0;
+            gap: 10px;
             align-items: center;
             font-weight: 600;
             color: var(--muted);
@@ -135,6 +137,9 @@
         .nav-links a {
             text-decoration: none;
             color: var(--muted);
+            min-width: max-content;
+            padding: 0 8px;
+            font-size: 14px;
         }
 
         .nav-links a:hover {
@@ -145,13 +150,14 @@
             border: 1px solid var(--border);
             background: rgba(255, 255, 255, .06);
             color: var(--text);
-            padding: 10px 14px;
+            padding: 8px 10px;
             border-radius: 12px;
             font-weight: 700;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 13px;
         }
 
         .btn.primary {
@@ -196,6 +202,156 @@
             border-top: 1px solid var(--border);
             color: var(--muted);
         }
+
+        /* 🔽 Responsive for mobile */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: max-content;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .nav-inner {
+                gap: 16px;
+            }
+
+            .store-btn img {
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .nav-inner {
+                flex-wrap: nowrap;
+                align-items: center;
+            }
+
+            .nav-actions {
+                width: auto;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                gap: 8px;
+            }
+
+            .nav-actions .btn,
+            .nav-actions .store-btn,
+            #lang-select {
+                flex: 0 0 auto;
+                min-width: 90px;
+            }
+
+            .nav-links {
+                display: flex;
+                flex: 1 1 auto;
+                min-width: 0;
+                max-width: 100%;
+                overflow: visible;
+                white-space: nowrap;
+            }
+
+            .nav-links a {
+                flex: 0 0 auto;
+                font-size: 14px;
+                padding: 0 6px;
+            }
+
+            .store-btn img {
+                height: 34px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .section-sub {
+                max-width: 100%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .nav-inner {
+                gap: 12px;
+                padding: 14px 0;
+            }
+
+            .nav-actions {
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .store-btn img {
+                height: 30px;
+            }
+
+            #lang-select {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .btn,
+            .store-btn {
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .section-sub {
+                font-size: 16px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .list {
+                padding-left: 14px;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1320px;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            .container {
+                max-width: 1440px;
+                padding: 0 32px;
+            }
+
+            .nav-inner {
+                gap: 16px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+        }
     </style>
 </head>
 
@@ -229,6 +385,10 @@
                     <a class="btn" href="#contact">Richiedi informazioni</a>
                     <a href="#get-started" class="store-btn">
                         <img src="playstore.png" alt="Get it on Play Store" />
+                    </a>
+                    <a href="https://apps.apple.com/us/app/betogether-app/id6760331110" class="store-btn"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="applestore.png" alt="Download on the App Store" />
                     </a>
                 </div>
             </div>

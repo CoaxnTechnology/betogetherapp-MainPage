@@ -97,15 +97,114 @@
         }
 
         /* 🔽 Responsive for mobile */
-        @media (max-width: 980px) {
-            .nav-links {
-                display: none;
-                /* already hidden in your design */
-            }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+        }
 
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: max-content;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 18px;
+            }
+            .nav-inner {
+                gap: 16px;
+            }
             .store-btn img {
-                height: 40px;
-                /* mobile size */
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .nav-inner {
+                flex-wrap: wrap;
+                align-items: flex-start;
+            }
+            .nav-actions {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .nav-actions .btn,
+            .nav-actions .store-btn,
+            #lang-select {
+                flex: 1 1 auto;
+                min-width: 120px;
+            }
+            .nav-links {
+                display: flex;
+                flex: 1 1 100%;
+                min-width: 0;
+                max-width: 100%;
+                overflow-x: auto;
+                padding-bottom: 4px;
+                margin-top: 10px;
+            }
+            .nav-links a {
+                flex: 0 0 auto;
+            }
+            .nav-links::-webkit-scrollbar {
+                display: none;
+            }
+            .store-btn img {
+                height: 34px;
+            }
+            .section-title {
+                font-size: 26px;
+            }
+            .section-sub {
+                max-width: 100%;
+            }
+            .card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .nav-inner {
+                gap: 12px;
+                padding: 14px 0;
+            }
+            .nav-actions {
+                justify-content: space-between;
+                gap: 8px;
+            }
+            .store-btn img {
+                height: 30px;
+            }
+            #lang-select {
+                width: 100%;
+                min-width: 0;
+            }
+            .btn,
+            .store-btn {
+                justify-content: center;
+            }
+            .section-title {
+                font-size: 24px;
+            }
+            .section-sub {
+                font-size: 16px;
+            }
+            .card {
+                padding: 16px;
+            }
+            .list {
+                padding-left: 14px;
+            }
+            .container {
+                padding: 0 16px;
             }
         }
 
@@ -255,6 +354,10 @@
                     <a class="btn" href="#contact">Request info</a>
                     <a href="#get-started" class="store-btn">
                         <img src="playstore.png" alt="Get it on Play Store" />
+                    </a>
+                    <a href="https://apps.apple.com/us/app/betogether-app/id6760331110" class="store-btn"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="applestore.png" alt="Download on the App Store" />
                     </a>
                 </div>
             </div>
