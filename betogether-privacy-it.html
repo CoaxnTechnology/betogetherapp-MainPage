@@ -59,9 +59,11 @@
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             min-width: 0;
             overflow-x: visible;
+            min-width: 0;
+
             /* 👈 single line */
         }
 
@@ -86,8 +88,15 @@
         /* Language dropdown */
         #lang-select {
             white-space: nowrap;
-            width: 100px;
-            min-width: 100px;
+            width: auto;
+            /* ✅ CHANGE */
+            min-width: auto;
+            /* ✅ CHANGE */
+            margin-left: 0;
+            /* ✅ CHANGE */
+            margin: 0 30px;
+            /* 👈 LEFT + RIGHT spacing */
+
         }
 
         /* Prevent text breaking */
@@ -382,7 +391,7 @@
 
 
                 <div class="nav-actions">
-                    <a class="btn" href="#contact">Richiedi informazioni</a>
+                    <!-- <a class="btn" href="#contact">Richiedi informazioni</a> -->
                     <a href="#get-started" class="store-btn">
                         <img src="playstore.png" alt="Get it on Play Store" />
                     </a>
